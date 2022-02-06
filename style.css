@@ -1,0 +1,160 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+}
+nav h1 {
+  padding: 25px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: lightgreen;
+  font-weight: 800;
+  color: darkblue;
+}
+ul {
+  list-style-type: none;
+}
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  background: lightgoldenrodyellow;
+  position: relative;
+}
+#libraryList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 85%;
+  margin: 0 auto;
+  align-items: center;
+}
+.bookCard {
+  position: relative;
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+  background: #ccc;
+  border-radius: 10px;
+  width: 300px;
+  height: 200;
+}
+i {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  cursor: pointer;
+}
+
+.title {
+  font-weight: 900;
+  margin-bottom: 15px;
+}
+.author {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.isRead-container {
+  margin-top: 10px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.isRead-container .read {
+  height: 20px;
+  width: 20px;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 12;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  width: 80%;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.close {
+  align-self: flex-end;
+}
+.modal-content label {
+  color: #333;
+  font-size: 1.4rem;
+  margin-top: 10px;
+}
+.modal-content input {
+  font-size: 1.4rem;
+  border-radius: 5px;
+  padding: 5px 5px;
+  border: 2px solid #333;
+  width: 80%;
+}
+.modal-content input:focus-visible {
+  outline: 2px solid lightskyblue;
+  border: 2px solid rgba(0, 0, 0, 0);
+}
+
+/* modal close button */
+.close {
+  color: #aaaaaa;
+  /* float: right; */
+  font-size: 28px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.close:hover {
+  cursor: pointer;
+}
+
+#submit {
+  color: #333;
+  padding: 10px 15px;
+  font-size: 1.4rem;
+  background: white;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+
+#btn {
+  position: fixed;
+  bottom: 15%;
+  right: 15%;
+  padding: 15px;
+  font-weight: 800;
+  color: #fff;
+  background: #000;
+  border: 5px black;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  box-shadow: 0px 0px 10px 3px lightgreen;
+  cursor: pointer;
+}
