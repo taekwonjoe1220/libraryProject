@@ -11,8 +11,6 @@ const modal = document.getElementById("modal");
 const close = document.querySelector(".close");
 const btn = document.getElementById("btn");
 
-
-
 // const modalCheckbox = document.getElementById("modalCheckbox");
 // book consructor
 function Book(title, author, pages, read) {
@@ -32,41 +30,47 @@ function addBookToLibrary(title, author, pages, read) {
 
 function updateList() {
   // iterate over list and add li tags
+  if (library.length === 0) {
+    list.innerHTML = "";
+  } else {
+    for (let i = 0; i < library.length; i++) {
+      // grab book info and update DOM with book title, author, # of pages, etc.
+      let current = library[i];
 
-  for (let i = library.length - 1; i < library.length; i++) {
-    const li = document.createElement("li");
-    li.setAttribute("data-index", `${library.length - 1}`);
-    list.appendChild(li);
-
-    // grab book info and update DOM with book title, author, # of pages, etc.
-    let current = library[i];
-    li.classList.add("bookCard");
-
-    if (current.read === false) {
-      li.innerHTML = `
-      <i class="fas fa-trash-alt delete"></i>
-      <h2 class="title">${current.title}</h2>
-      <p class="author">${current.author}</p>
-      <p class="pages">${current.pages}</p>
-      <div class="isRead-container">
-        <span class="readText">Read</span>
-        <input type="checkbox" name="readBox" class="readBox" />
-      </div>`;
-    } else {
-      li.innerHTML = `
-      <i class="fas fa-trash-alt delete"></i>
-      <h2 class="title">${current.title}</h2>
-      <p class="author">${current.author}</p>
-      <p class="pages">${current.pages}</p>
-      <div class="isRead-container">
-        <span class="readText">Read</span>
-        <input type="checkbox" name="readBox" class="readBox" checked/>
-      </div>`;
+      if (i === 0) {
+        list.innerHTML = "";
+      }
+      // inefficient... not DRY principle -> refactor this to simplify the code later
+      if (current.read === false) {
+        list.innerHTML += `
+        <li class = "bookCard" data-index = ${i}>
+        <i class="fas fa-trash-alt delete"></i>
+        <h2 class="title">${current.title}</h2>
+        <p class="author">${current.author}</p>
+        <p class="pages">${current.pages}</p>
+        <div class="isRead-container">
+          <span class="readText">Read</span>
+          <input type="checkbox" name="readBox" class="readBox" />
+        </div>
+        </li>`;
+      } else {
+        list.innerHTML += `
+        <li class = "bookCard" data-index = ${i}>
+        <i class="fas fa-trash-alt delete"></i>
+        <h2 class="title">${current.title}</h2>
+        <p class="author">${current.author}</p>
+        <p class="pages">${current.pages}</p>
+        <div class="isRead-container">
+          <span class="readText">Read</span>
+          <input type="checkbox" name="readBox" class="readBox" checked/>
+        </div>
+        </li>`;
+      }
     }
   }
 }
 
-addBookToLibrary("The Hobbit", "Tolkien", 256, true);
+addBookToLibrary("The Hobbit", "Tolkien", 256, true); // test case
 
 // event listeners
 submit.addEventListener("click", () => {
@@ -76,6 +80,10 @@ submit.addEventListener("click", () => {
     addBookToLibrary(title.value, author.value, pages.value, read.checked);
     modal.style.display = "none";
   }
+  // reset fields
+  title.value = "";
+  author.value = "";
+  pages.value = "";
 });
 
 // When the user clicks anywhere outside of the modal, close it
@@ -95,14 +103,14 @@ btn.addEventListener("click", () => {
 });
 
 // update read attribute in library on click
-list.addEventListener('click', (e) => {
-  if (e.target.classList.contains('readBox')) {
-    // do stuff
+list.addEventListener("click", (e) => {
+  if (e.target.classList.contains("readBox")) {
     let position = e.target.parentNode.parentNode.dataset.index;
     library[position].read = e.target.checked;
   }
-  if (e.target.classList.contains('delete')) {
-    let position = e.target.parentNode.parentNode.dataset.index;
+  if (e.target.classList.contains("delete")) {
+    let position = e.target.parentNode.dataset.index;
     library.splice(position, 1);
+    updateList();
   }
-})
+});
